@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HomeComponent from "./components/home/HomeComponent";
@@ -12,7 +11,7 @@ ReactDOM.render(
     <Router>
       <div>
         <Route exact path="/" component={HomeComponent} />
-        <Route exact path="/test" component={App} />
+        <Route exact path="/tv-shows" component={HomeComponent} />
       </div>
     </Router>
   </Provider>,
