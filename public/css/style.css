@@ -925,6 +925,8 @@ display: block;
 }
 .main-right-news-container .main-right-news-list .card .card-header .news-head {
 	background:#dae2eb;
+    display: block;
+    width: 100%;
 }
 .main-right-news-container .main-right-news-list .card .card-header .news-head label {
 	display: inline-flex;

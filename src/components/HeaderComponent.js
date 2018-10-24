@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MainMenu from "./MainMenu";
 
 class HeaderComponent extends Component {
 
@@ -36,6 +37,7 @@ class HeaderComponent extends Component {
                 </div>
               </div>
             </div>
+            <MainMenu />
           </nav>
         </header>
       </React.Fragment>
