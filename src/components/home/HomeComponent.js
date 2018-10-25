@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import HeaderComponent from './../HeaderComponent';
 import MoviesComponent from './../movie/MoviesComponent';
 import NewsComponent from '../news/NewsComponent';
 import { connect } from 'react-redux';
 import { movieListAsync } from './../../store/actions/movieActions';
 import { newsTypesListAsync } from './../../store/actions/newsTypeAction';
+import { birthdayPeopleListAsync } from './../../store/actions/peopleActions';
+import BirthdayPeopleComponent from '../people/BirthdayPeopleComponent';
 
 class HomeComponent extends Component {
   constructor(props) {
@@ -14,11 +15,12 @@ class HomeComponent extends Component {
   componentWillMount() {
     this.props.getMovies();
     this.props.getNewsTypes();
+    this.props.getBirthdayPeople();
   }
 
   render() {
 
-    const { movies, newsTypes } = this.props;
+    const { movies, newsTypes, people } = this.props;
 
     return (
       <React.Fragment>
@@ -27,6 +29,7 @@ class HomeComponent extends Component {
             <div className="row no-gutters">
               <div className="col-8">
                 <MoviesComponent movies={movies}/>
+                <BirthdayPeopleComponent birthdayPeople={people.birthdayPeople}/>
               </div>
               <div className="col-4">
                 <NewsComponent newsTypes={newsTypes}/>
@@ -45,6 +48,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getNewsTypes() {
     dispatch(newsTypesListAsync())
+  },
+  getBirthdayPeople() {
+    dispatch(birthdayPeopleListAsync())
   }
 });
 const mapStateToProps = state => state;
