@@ -22,7 +22,6 @@ class HomeComponent extends Component {
 
     return (
       <React.Fragment>
-        <HeaderComponent />
         <section className="container main-layout">
           <div className="main-page">
             <div className="row no-gutters">

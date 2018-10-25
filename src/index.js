@@ -3,13 +3,22 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter as Router } from 'react-router-dom';
-import HomeComponent from "./components/home/HomeComponent";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import HomeComponent from './components/home/HomeComponent';
+import TVShowsComponent from './components/movie/TVShowsComponent';
+import HeaderComponent from "./components/HeaderComponent";
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <HomeComponent />
+      <React.Fragment>
+        <HeaderComponent />
+        <Switch>
+          <Route exact={true} path={"/"} component={HomeComponent} />
+          <Route path={"/tv-shows"} component={TVShowsComponent} />
+          <Route component={HomeComponent}/>
+        </Switch>
+      </React.Fragment>
     </Router>
   </Provider>,
 
