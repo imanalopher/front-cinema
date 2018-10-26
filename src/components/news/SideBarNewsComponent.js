@@ -33,10 +33,10 @@ class SideBarNewsComponent extends Component {
   }
 
   render() {
-    const { news } = this.props;
+    const { newsBySlug } = this.props.news;
     return (
       <React.Fragment>
-        {news.map(newsItem => {
+        {newsBySlug.map(newsItem => {
           return <div className="card" key={newsItem.id}>
             <div className="card-header" id={`heading${newsItem.id}`}>
               <a className="news-head collapsed" data-toggle="collapse" data-target={`#collapse${newsItem.id}`} aria-controls={`collapse${newsItem.id}`}>

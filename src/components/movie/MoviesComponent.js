@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MovieComponent from './MovieComponent';
+import { NavLink } from 'react-router-dom';
 
 class MoviesComponent extends Component {
   constructor(props) {
@@ -7,7 +8,35 @@ class MoviesComponent extends Component {
   }
 
   render() {
-    const { movies } = this.props;
+    const { movies, hypeNews } = this.props;
+
+    let hype = '';
+    if (typeof(hypeNews) === 'object') {
+      hype = <React.Fragment>
+        <span className="spacer"/>
+        <div className="col-12">
+          <div className="editors-spot">
+            <label>Casting for "Hype of Manas"</label>
+            <div className="row">
+              <div className="col-6">
+                <img src={`http://127.0.0.1/${hypeNews.image}`} />
+              </div>
+              <div className="col-6">
+                <div className="editors-news">
+                  <h1>{hypeNews.title}</h1>
+                  <span className="posted-by">Posted by: Aichurek Aichurekovna</span>
+                  <p>{hypeNews.description}</p>
+                  <div className="editors-bottom">
+                    <a href="#">Continue Reading..</a>
+                    <span className="editors-time"><i className="far fa-clock"/>1 hour ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
+    }
 
     return (
       <div className="main-container">
@@ -15,7 +44,7 @@ class MoviesComponent extends Component {
           <div className="current-movies-head">
             <ul className="current-movies-nav">
               <li><a className="active" href="#">This Month</a></li>
-              <li><a href="#">Coming Soon</a></li>
+              <li><NavLink to="/coming-soon">Coming Soon</NavLink></li>
               <li><a href="#">Box Office</a></li>
             </ul>
             <ul className="current-movies-filter">
@@ -33,6 +62,7 @@ class MoviesComponent extends Component {
           </div>
           <div className="row current-movies-content">
             { movies.movies.map((movie) => <MovieComponent movie={movie}/>) }
+            {hype}
           </div>
         </div>
       </div>

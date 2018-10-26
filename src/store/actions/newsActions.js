@@ -14,6 +14,16 @@ export const clearNewsListBySlug = () => ({
     payload: [],
 });
 
+export const hypeNews = news => ({
+    type: 'HYPE_NEWS',
+    payload: news,
+});
+
+export const spotlightNews = news => ({
+    type: 'GET_SPOTLIGHT_NEWS',
+    payload: news,
+});
+
 export function newsListAsync() {
   return (dispatch) => {
     return fetchGetNews('http://127.0.0.1:8000/api/news').then( json => dispatch(newsList(json)) );
@@ -23,6 +33,18 @@ export function newsListAsync() {
 export function newsListBySlugAsync(slug) {
   return (dispatch) => {
     return fetchGetNews(`http://127.0.0.1:8000/api/news/${slug}`).then(json => dispatch(newsListBySlug(json)));
+  };
+}
+
+export function hypeNewsAsync() {
+  return (dispatch) => {
+    return fetchGetNews(`http://127.0.0.1:8000/api/news/hype`).then(json => dispatch(hypeNews(json)));
+  };
+}
+
+export function spotlightNewsAsync() {
+  return (dispatch) => {
+    return fetchGetNews(`http://127.0.0.1:8000/api/news/spotlight`).then(json => dispatch(spotlightNews(json)));
   };
 }
 
