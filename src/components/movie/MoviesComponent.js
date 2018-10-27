@@ -61,7 +61,7 @@ class MoviesComponent extends Component {
             </ul>
           </div>
           <div className="row current-movies-content">
-            { movies.movies.map((movie) => <MovieComponent movie={movie}/>) }
+            <MovieComponent movies={movies.movies} />
             {hype}
           </div>
         </div>

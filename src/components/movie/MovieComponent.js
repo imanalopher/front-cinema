@@ -6,10 +6,8 @@ class MovieComponent extends Component {
     super(props);
   }
 
-  render() {
-
-    const { movie } = this.props;
-    const directors = movie.directors.map((director, index, arr)=> {
+  getDirectors = (movie) => {
+    return movie.directors.map((director, index, arr)=> {
       let directorFullName = `${director.name + ' ' + director.surname}`;
 
       if (arr.length === index + 1) {
@@ -18,9 +16,13 @@ class MovieComponent extends Component {
 
       return `${directorFullName}, `
     });
+  };
 
-    return (
-      <div className="col-4" key={movie.title.toString()}>
+  render() {
+
+    const { movies } = this.props;
+
+    return movies.map(movie => <div className="col-4" key={movie.title.toString()}>
         <div className="current-movie-item">
           <div className="current-movie-pictrailer">
             <img src={`http://localhost:8000/${movie.image}`} />
@@ -28,7 +30,7 @@ class MovieComponent extends Component {
           <div className="current-movie-detail">
             <div className="current-movie-detail-info">
               <h1>{movie.title}</h1>
-              <h2>{directors}</h2>
+              <h2>{this.getDirectors(movie)}</h2>
               <div className="current-movie-detail-stars">
                 {[1,2,3,4,5,6,7,8,9,10].map((rate, key) => <i className={ 'fa fa-star' + (movie.rating < rate ? ' off' : '' )} aria-hidden="true" key={key} />)}
                 <span className="star-number">{movie.rating}/10</span>
@@ -52,12 +54,12 @@ class MovieComponent extends Component {
               </span>
             </label>
             <span className="creator">
-              {directors}
+              <h2>{this.getDirectors(movie)}</h2>
             </span>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -70,11 +72,12 @@ MovieComponent.defaultProps = {
     image:           PropTypes.string.isRequired,
     genre:           PropTypes.array.isRequired,
     directors:       PropTypes.array.isRequired,
-  }
+  },
+  movies: PropTypes.array.isRequired,
 };
 
 MovieComponent.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movies: PropTypes.array.isRequired,
 };
 
 export default MovieComponent;
