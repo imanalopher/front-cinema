@@ -5,10 +5,7 @@ class BirthdayPeopleComponent extends Component {
     super(props);
   }
 
-  render() {
-
-    const { birthdayPeople, spotlightNews } = this.props;
-
+  getSpotlight = (spotlightNews) => {
     let spotlight = '';
     if (typeof(spotlightNews) === 'object') {
       spotlight = <React.Fragment>
@@ -33,36 +30,55 @@ class BirthdayPeopleComponent extends Component {
         </div>
       </React.Fragment>
     }
+    return spotlight;
+  };
+
+  getBirthdayPeopleList = (birthdayPeople) => {
+    let birthdayPeopleList = '';
+    if (Array.isArray(birthdayPeople) && birthdayPeople.length) {
+      birthdayPeopleList = <React.Fragment>
+        <div className="main-birthday-title">
+          <label>
+            Born Today
+            <span>{(new Date()).getDate()} day of {(new Date()).getMonth()+1}</span>
+          </label>
+          <a href="#">See All</a>
+        </div>
+        <div className="main-birthday-list">
+          <ul>
+            {birthdayPeople.map(people => {
+              return (
+                <li key={people.id}>
+                  <label>
+                    <a href="#">{people.name} {people.surname}</a>
+                    <span className="birthday-occup">{people.occupations.join(', ')}</span>
+                    <span className="birthday-cake">
+                        <i className="fas fa-birthday-cake" /> He is turned {(new Date()).getFullYear() - people.year} today.
+                      </span>
+                  </label>
+                  <img src={`http://127.0.0.1/${people.image}`}/>
+                  <span className="turned-in">Turned in {(new Date()).getFullYear() - people.year}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </React.Fragment>
+    }
+    return birthdayPeopleList;
+  };
+
+  render() {
+
+    const { birthdayPeople, spotlightNews } = this.props;
+
+    let spotlight = this.getSpotlight(spotlightNews);
+    let birthdayPeopleList = this.getBirthdayPeopleList(birthdayPeople);
 
     return (
       <div className="main-container">
         <div className="main-page-birthdays">
-          <div className="main-birthday-title">
-            <label>
-              Born Today
-              <span>{(new Date()).getDate()} day of {(new Date()).getMonth()+1}</span>
-            </label>
-            <a href="#">See All</a>
-          </div>
-          <div className="main-birthday-list">
-            <ul>
-              {birthdayPeople.map(people => {
-                return (
-                  <li key={people.id}>
-                    <label>
-                      <a href="#">{people.name} {people.surname}</a>
-                      <span className="birthday-occup">{people.occupations.join(', ')}</span>
-                      <span className="birthday-cake">
-                        <i className="fas fa-birthday-cake" /> He is turned {(new Date()).getFullYear() - people.year} today.
-                      </span>
-                    </label>
-                    <img src={`http://127.0.0.1/${people.image}`}/>
-                    <span className="turned-in">Turned in {(new Date()).getFullYear() - people.year}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          {birthdayPeopleList}
           {spotlight}
         </div>
       </div>
