@@ -7,28 +7,45 @@ class SideBarNewsComponent extends Component {
     super(props);
 
     this.state = {
-      haveRequested: false,
+      history: [],
     };
   }
 
   state = {
-    haveRequested: false,
+    history: [],
   };
 
   componentWillMount() {
-    const {slug} = this.props.match.params;
-    this.props.getNewsBySlug(slug);
+    const { slug } = this.props.match.params;
+    if (!this.state.history.includes(slug)) {
+      if (slug === undefined) {
+        this.props.getNewsBySlug('top-news');
+      } else {
+        this.props.getNewsBySlug(slug);
+      }
+
+      this.setState(prevState => ({
+        history: [...prevState.history, slug]
+      }));
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.match.params.slug !== undefined && this.props.match.params.slug !== undefined && nextProps.match.params.slug !== this.props.match.params.slug) {
-      const {slug} = nextProps.match.params;
-      this.props.getNewsBySlug(slug);
-    }
+    const { slug } = nextProps.match.params;
+    if (!this.state.history.includes(slug)) {
+      this.setState({ history: [] });
 
-    if (nextProps.match.params.slug === undefined && nextProps.match.path === "/" && this.state.haveRequested === false) {
-      this.props.getNewsBySlug('top-news');
-      this.setState({ haveRequested: true });
+      if (nextProps.match.params.slug !== undefined && this.props.match.params.slug !== undefined && nextProps.match.params.slug !== this.props.match.params.slug) {
+        this.props.getNewsBySlug(slug);
+      }
+
+      if (nextProps.match.params.slug === undefined && nextProps.match.path === "/") {
+        this.props.getNewsBySlug('top-news');
+      }
+
+      this.setState(prevState => ({
+        history: [...prevState.history, slug]
+      }));
     }
   }
 
