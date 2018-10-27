@@ -50,5 +50,5 @@ export function spotlightNewsAsync() {
 
 function fetchGetNews(url) {
   return fetch(url)
-    .then(response => Promise.resolve(response.json()));
+    .then(response => response.json());
 }

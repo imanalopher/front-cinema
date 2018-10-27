@@ -11,6 +11,5 @@ export function birthdayPeopleListAsync() {
 }
 
 function fetchPeople(url) {
-  return fetch(url)
-    .then(response => Promise.resolve(response.json()));
+  return fetch(url).then(response => response.json());
 }

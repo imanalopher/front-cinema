@@ -12,5 +12,5 @@ export function movieListAsync() {
 
 function fetchPosts(url) {
   return fetch(url)
-    .then(response => Promise.resolve(response.json()));
+    .then(response => response.json());
 }

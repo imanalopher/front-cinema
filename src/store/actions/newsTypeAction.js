@@ -13,5 +13,5 @@ export function newsTypesListAsync() {
 
 function fetchGetNews(url) {
   return fetch(url)
-    .then(response => Promise.resolve(response.json()));
+    .then(response => response.json());
 }
