@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import MovieComponent from './MovieComponent';
-import { NavLink } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
+import ComingSoonComponent from "./ComingSoonComponent";
 
 class MoviesComponent extends Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class MoviesComponent extends Component {
   }
 
   render() {
-    const { movies, hypeNews } = this.props;
+    const { hypeNews } = this.props;
 
     let hype = '';
     if (typeof(hypeNews) === 'object') {
@@ -39,33 +39,39 @@ class MoviesComponent extends Component {
     }
 
     return (
-      <div className="main-container">
-        <div className="current-movies">
-          <div className="current-movies-head">
-            <ul className="current-movies-nav">
-              <li><a className="active" href="#">This Month</a></li>
-              <li><NavLink to="/coming-soon">Coming Soon</NavLink></li>
-              <li><a href="#">Box Office</a></li>
-            </ul>
-            <ul className="current-movies-filter">
-              <li>
-                <a className="active" href="#">
-                  <i className="fa fa-th-large" aria-hidden="true" />
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <i className="fa fa-bars" aria-hidden="true" />
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="row current-movies-content">
-            <MovieComponent movies={movies.movies} />
-            {hype}
+      <BrowserRouter>
+        <div className="main-container">
+          <div className="current-movies">
+            <div className="current-movies-head">
+              <ul className="current-movies-nav">
+                <li><NavLink to="/" exact={true} activeClassName={"active"}>This Month</NavLink></li>
+                <li><NavLink to="/coming-soon" activeClassName={"active"}>Coming Soon</NavLink></li>
+              </ul>
+              <ul className="current-movies-filter">
+                <li>
+                  <a className="active" href="#">
+                    <i className="fa fa-th-large" aria-hidden="true" />
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i className="fa fa-bars" aria-hidden="true" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <Switch>
+              <div className="row current-movies-content">
+                <Route exact={true} path='/' component={ComingSoonComponent} />
+                <Route path='/coming-soon' component={ComingSoonComponent} />
+                {hype}
+              </div>
+            </Switch>
+
           </div>
         </div>
-      </div>
+      </BrowserRouter>
     );
   }
 }

@@ -31,7 +31,7 @@ class HomeComponent extends Component {
           <div className="main-page">
             <div className="row no-gutters">
               <div className="col-8">
-                <MoviesComponent movies={movies} hypeNews={news.hypeNews} />
+                <MoviesComponent movies={movies} hypeNews={news.hypeNews} props={this.props} />
                 <BirthdayPeopleComponent birthdayPeople={people.birthdayPeople} spotlightNews={news.spotlightNews}/>
               </div>
               <div className="col-4">

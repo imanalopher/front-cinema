@@ -33,6 +33,7 @@ class NewsComponent extends Component {
               <div id="accordion">
                 <Route exact={true} path='/' component={SideBarNewsComponent} />
                 <Route path='/news/:slug' component={SideBarNewsComponent} />
+                <Route path={"/coming-soon"} component={SideBarNewsComponent} />
               </div>
             </div>
           </Switch>

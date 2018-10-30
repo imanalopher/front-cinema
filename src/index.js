@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomeComponent from './components/home/HomeComponent';
 import TVShowsComponent from './components/movie/TVShowsComponent';
 import HeaderComponent from "./components/HeaderComponent";
+import FooterComponent from "./components/FooterComponent";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -18,6 +19,7 @@ ReactDOM.render(
           <Route path={"/tv-shows"} component={TVShowsComponent} />
           <Route component={HomeComponent}/>
         </Switch>
+        <FooterComponent />
       </React.Fragment>
     </Router>
   </Provider>,
