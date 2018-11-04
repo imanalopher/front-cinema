@@ -11,7 +11,7 @@ class MainMenu extends Component {
               <NavLink to="/" className="logo" />
               <ul className="nav-bar">
                 <li>
-                  <NavLink exact to="/" activeClassName="active">Фильмы</NavLink>
+                  <NavLink exact to="/movies" activeClassName="active">Фильмы</NavLink>
                 </li>
                 <li>
                   <NavLink to="/tv-shows" activeClassName="active">ТВ шоу</NavLink>

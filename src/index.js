@@ -8,6 +8,7 @@ import HomeComponent from './components/home/HomeComponent';
 import TVShowsComponent from './components/movie/TVShowsComponent';
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
+import FilmsComponent from "./components/movie/FilmsComponent";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <HeaderComponent />
         <Switch>
           <Route exact={true} path={"/"} component={HomeComponent} />
+          <Route path={"/movies"} component={FilmsComponent} />
           <Route path={"/tv-shows"} component={TVShowsComponent} />
           <Route component={HomeComponent}/>
         </Switch>

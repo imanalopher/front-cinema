@@ -14,7 +14,6 @@ class HomeComponent extends Component {
   }
 
   componentWillMount() {
-    this.props.getMovies();
     this.props.getNewsTypes();
     this.props.getBirthdayPeople();
     this.props.getHypeNews();
@@ -46,9 +45,6 @@ class HomeComponent extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getMovies() {
-    dispatch(movieListAsync())
-  },
   getNewsTypes() {
     dispatch(newsTypesListAsync())
   },

@@ -4,21 +4,26 @@ export const movieList = movies => ({
     payload: movies,
 });
 
+export const movieLists = movies => ({
+    type: 'GET_MOVIE_LIST',
+    payload: movies,
+});
+
 export function movieListAsync() {
   return (dispatch) => {
     return fetchPosts('http://127.0.0.1:8000/api/movie').then( json => dispatch(movieList(json)) );
   };
 }
 
-export function getThisMonthMovieListAsync() {
+export function movieListsAsync() {
   return (dispatch) => {
-    return fetchPosts('http://127.0.0.1:8000/api/movie/this-month').then( json => dispatch(movieList(json)) );
+    return fetchPosts('http://127.0.0.1:8000/api/movie/list-movies').then( json => dispatch(movieLists(json)) );
   };
 }
 
-export function getComingSoonMovieListAsync() {
+export function getHomeMovieListAsync(slug) {
   return (dispatch) => {
-    return fetchPosts('http://127.0.0.1:8000/api/movie/coming-soon').then( json => dispatch(movieList(json)) );
+    return fetchPosts(`http://127.0.0.1:8000/api/movie/${slug}`).then( json => dispatch(movieList(json)) );
   };
 }
 
