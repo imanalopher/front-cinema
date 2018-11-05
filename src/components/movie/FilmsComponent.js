@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Pagination from 'react-js-pagination';
+import { Link } from 'react-router-dom';
 import { movieListsAsync } from './../../store/actions/movieActions';
 
 class FilmsComponent extends Component {
@@ -18,7 +19,6 @@ class FilmsComponent extends Component {
   }
 
   handlePageChange(pageNumber) {
-    console.log(`active page is ${pageNumber}`);
     this.setState({activePage: pageNumber});
     this.props.getMovieLists(pageNumber);
   }
@@ -52,7 +52,9 @@ class FilmsComponent extends Component {
                   <div className="review">
                     <div className="row no-gutters">
                       <div className="col-10">
-                        <p className="list-title"><a href="#">{movie.title}</a></p>
+                        <p className="list-title">
+                          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                        </p>
                         <div className="info_m">
                           <div className="age_allow pg18">18+</div>
                           <div className="m-duration"><i className="far fa-clock"/><span>170 мин.</span></div>
@@ -89,12 +91,12 @@ class FilmsComponent extends Component {
               </div>
             })}
           </div>
-          <div className="pagination row">
+          <div className="col-lg-6 offset-lg-3 d-flex">
             <Pagination
               activePage={this.state.activePage}
               activeClass={'active_page'}
               itemClass={'page_number'}
-              innerClass={''}
+              innerClass={'pagination mx-auto justify-content-center'}
               itemsCountPerPage={10}
               totalItemsCount={movieCount}
               pageRangeDisplayed={5}
