@@ -1,5 +1,5 @@
 
-const initialState = { movies: [], movieList: [] };
+const initialState = { movies: [], movieList: { movies: [], count: 0 } };
 
 export default function(state = initialState, action) {
   switch (action.type) {

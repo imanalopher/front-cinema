@@ -15,9 +15,9 @@ export function movieListAsync() {
   };
 }
 
-export function movieListsAsync() {
+export function movieListsAsync(page) {
   return (dispatch) => {
-    return fetchPosts('http://127.0.0.1:8000/api/movie/list-movies').then( json => dispatch(movieLists(json)) );
+    return fetchPosts(`http://127.0.0.1:8000/api/movie/list-movies?page=${page}`).then( json => dispatch(movieLists(json)) );
   };
 }
 

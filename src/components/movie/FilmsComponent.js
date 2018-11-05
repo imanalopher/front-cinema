@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Pagination from 'react-js-pagination';
 import { movieListsAsync } from './../../store/actions/movieActions';
 
 class FilmsComponent extends Component {
   constructor(props) {
     super(props);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.state = {
+      activePage: 1
+    };
   }
 
   componentWillMount() {
-    this.props.getMovieLists();
+    this.props.getMovieLists(1);
+  }
+
+  handlePageChange(pageNumber) {
+    console.log(`active page is ${pageNumber}`);
+    this.setState({activePage: pageNumber});
+    this.props.getMovieLists(pageNumber);
   }
 
   render() {
 
     const { movieList } = this.props;
+    const movies = movieList['movies'];
+    const movieCount = movieList['count'];
 
     return (
       <section className="main-layout">
@@ -29,8 +43,8 @@ class FilmsComponent extends Component {
             </div>
           </div>
           <div className="row">
-            {movieList.map(movie => {
-              return <div className="col-6">
+            {movies.map(movie => {
+              return <div key={movie.id} className="col-6">
                 <div className="mlist-item">
                   <div className="image">
                     <img src={`http://localhost:8000/${movie.image}`}/>
@@ -43,9 +57,9 @@ class FilmsComponent extends Component {
                           <div className="age_allow pg18">18+</div>
                           <div className="m-duration"><i className="far fa-clock"/><span>170 мин.</span></div>
                           <div className="m-genre">
-                            <a href="#">Action |</a>
-                            <a href="#">Fantasy |</a>
-                            <a href="#">Comedy</a>
+                            {movie.genre.map(genreItem => {
+                              return <a key={genreItem} href="#">{genreItem} | </a>
+                            })}
                           </div>
                         </div>
                       </div>
@@ -61,11 +75,7 @@ class FilmsComponent extends Component {
                     </div>
 
                     <div>
-                      <p>
-                        Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                        totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae
-                        dicta sunt, explicabo.
-                      </p>
+                      <p>{movie.miniDescription}</p>
                     </div>
                     <div className="directors">
                       <p>Director: <a href="#">Mike</a></p>
@@ -78,110 +88,21 @@ class FilmsComponent extends Component {
                 </div>
               </div>
             })}
-            <div className="col-6">
-              <div className="mlist-item">
-                <div className="image">
-                  <img src="http://localhost:8000/uploads/movie/2/79f43195dda94c9348b55fe50b8fadae.jpeg"/>
-                </div>
-                <div className="review">
-                  <div className="row no-gutters">
-                    <div className="col-10">
-                      <p className="list-title"><a href="#">Death Wish (2018)</a></p>
-                      <div className="info_m">
-                        <div className="age_allow pg18">18+</div>
-                        <div className="m-duration"><i className="far fa-clock"/><span>170 мин.</span></div>
-                        <div className="m-genre">
-                          <a href="#">Action |</a>
-                          <a href="#">Fantasy |</a>
-                          <a href="#">Comedy</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2">
-                      <div className="m-rate">
-                        <i className="fa fa-star starr"/><span>4.9</span>
-                      </div>
-                      <div className="m-stats stat-down">
-                        <img className="stats-arrow" src="assets/images/system-images/stat_arrow.png"/>
-                        <span>1000</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p>
-                      Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                      totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae
-                      dicta sunt, explicabo.
-                    </p>
-                  </div>
-                  <div className="directors">
-                    <p>Director: <a href="#">Mike</a></p>
-                    <p>Actors: <a href="#">Lucy</a></p>
-                  </div>
-                  <div className="but_gr">
-                    <button className="button_t">СМОТРЕТЬ ТРЕЙЛЕР</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-6">
-              <div className="mlist-item">
-                <div className="image">
-                  <img src="http://localhost:8000//uploads/movie/2/79f43195dda94c9348b55fe50b8fadae.jpeg" />
-                </div>
-                <div className="review">
-                  <div className="row no-gutters">
-                    <div className="col-10">
-                      <p className="list-title"><a href="#">Death Wish (2018)</a></p>
-                      <div className="info_m">
-                        <div className="age_allow pg10">10+</div>
-                        <div className="m-duration"><i className="far fa-clock"/><span>170 мин.</span></div>
-                        <div className="m-genre">
-                          <a href="#">Action |</a>
-                          <a href="#">Fantasy |</a>
-                          <a href="#">Comedy</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-2">
-                      <div className="m-rate">
-                        <i className="fa fa-star starr"/><span>4.9</span>
-                      </div>
-                      <div className="m-stats stat-up">
-                        <img className="stats-arrow" src="assets/images/system-images/stat_arrow.png"/>
-                          1000
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <p>
-                      Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-                      totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae
-                      dicta sunt, explicabo.
-                    </p>
-                  </div>
-                  <div className="directors">
-                    <p>Director: Mike</p>
-                    <p>Actors: Lucy</p>
-                  </div>
-                  <div className="but_gr">
-                    <button className="button_t">СМОТРЕТЬ ТРЕЙЛЕР</button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
           <div className="pagination row">
-            <div className="page_number active_page"><a href="#">1</a></div>
-            <div className="page_number"><a href="#">2</a></div>
-            <div className="page_number"><a href="#">3</a></div>
-            <div className="page_number"><a href="#">4</a></div>
-            <div className="page_number"><a href="#">..</a></div>
-            <div className="page_number"><a href="#">65</a></div>
-            <div className="page_number"><a href="#"><i className="fas fa-arrow-right"></i></a></div>
-
+            <Pagination
+              activePage={this.state.activePage}
+              activeClass={'active_page'}
+              itemClass={'page_number'}
+              innerClass={''}
+              itemsCountPerPage={10}
+              totalItemsCount={movieCount}
+              pageRangeDisplayed={5}
+              onChange={this.handlePageChange}
+              hideDisabled={true}
+              hideFirstLastPages={false}
+              hideNavigation={true}
+            />
           </div>
         </div>
       </section>
@@ -189,9 +110,19 @@ class FilmsComponent extends Component {
   }
 }
 
+FilmsComponent.defaultProps = {
+  movies:       [],
+  movieCount:   0,
+};
+
+FilmsComponent.propTypes = {
+  movies:     PropTypes.array,
+  movieCount: PropTypes.number,
+};
+
 const mapDispatchToProps = dispatch => ({
-  getMovieLists() {
-    dispatch(movieListsAsync());
+  getMovieLists(page) {
+    dispatch(movieListsAsync(page));
   }
 });
 

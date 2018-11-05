@@ -1556,3 +1556,7 @@ hr {
 	text-decoration: none;
 	color:#000 !important;
 }
+
+div.pagination ul {
+	display: inline-flex;
+}
