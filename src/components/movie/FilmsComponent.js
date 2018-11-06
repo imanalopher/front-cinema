@@ -95,11 +95,14 @@ class FilmsComponent extends Component {
             <Pagination
               activePage={this.state.activePage}
               activeClass={'active_page'}
-              itemClass={'page_number'}
+              itemClass={'page-item'}
               innerClass={'pagination mx-auto justify-content-center'}
               itemsCountPerPage={10}
               totalItemsCount={movieCount}
               pageRangeDisplayed={5}
+              linkClass={'page-link'}
+              lastPageText={<i className="fas fa-arrow-right"/>}
+              firstPageText={<i className="fas fa-arrow-left"/>}
               onChange={this.handlePageChange}
               hideDisabled={true}
               hideFirstLastPages={false}
