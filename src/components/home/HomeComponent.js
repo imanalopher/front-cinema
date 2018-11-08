@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MoviesComponent from './../movie/MoviesComponent';
 import NewsComponent from '../news/NewsComponent';
 import { connect } from 'react-redux';
-import { movieListAsync } from './../../store/actions/movieActions';
+import { redCarpetListAsync } from './../../store/actions/redCarpetAction';
 import { newsTypesListAsync } from './../../store/actions/newsTypeAction';
 import { hypeNewsAsync, spotlightNewsAsync } from './../../store/actions/newsActions';
 import { birthdayPeopleListAsync } from './../../store/actions/peopleActions';
@@ -18,11 +18,12 @@ class HomeComponent extends Component {
     this.props.getBirthdayPeople();
     this.props.getHypeNews();
     this.props.getSpotlightNews();
+    this.props.getRedCarpets();
   }
 
   render() {
 
-    const { movies, newsTypes, people, news } = this.props;
+    const { movies, newsTypes, people, news, redCarpets } = this.props;
 
     return (
       <React.Fragment>
@@ -34,7 +35,7 @@ class HomeComponent extends Component {
                 <BirthdayPeopleComponent birthdayPeople={people.birthdayPeople} spotlightNews={news.spotlightNews}/>
               </div>
               <div className="col-4">
-                <NewsComponent newsTypes={newsTypes}/>
+                <NewsComponent newsTypes={newsTypes} carpets={redCarpets.carpets} />
               </div>
             </div>
           </div>
@@ -56,6 +57,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getSpotlightNews() {
     dispatch(spotlightNewsAsync())
+  },
+  getRedCarpets() {
+    dispatch(redCarpetListAsync())
   }
 });
 const mapStateToProps = state => state;

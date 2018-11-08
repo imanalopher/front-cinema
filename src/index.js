@@ -19,7 +19,7 @@ ReactDOM.render(
         <Switch>
           <Route exact={true} path={"/"} component={HomeComponent} />
           <Route exact path={"/movies"} component={FilmsComponent} />
-          <Route path={"/movies/:id"} component={FilmComponent} />
+          <Route path={"/movie/:id"} component={FilmComponent} />
           <Route path={"/tv-shows"} component={TVShowsComponent} />
           <Route component={HomeComponent}/>
         </Switch>

@@ -58,11 +58,12 @@ class FilmComponent extends React.Component {
               <img src={`http://localhost:8000/${movie.image}`} alt=""/>
               <div className="personal_info">
                 <p>
-                  <span>Director:</span>Robi
+                  <span>Director:</span>
+                  {movie.directors.map(director => `${director.name}, `)}
                 </p>
                 <p>
                   <span>Writers:</span>
-                  {movie.writers.map(director => `${director.name}, `)}
+                  {movie.writers.map(writer => `${writer.name}, `)}
                 </p>
                 <p><span>Release Date:</span>{movie.releaseDate}</p>
                 <p><span>Country:</span>USA</p>

@@ -7,6 +7,7 @@ const initialState = { movies: [], movieList: { movies: [], count: 0 },
     writers:      [],
     fullDesc:     '',
     cast:         [],
+    directors:    [],
   },
 };
 

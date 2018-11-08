@@ -21,11 +21,13 @@ class NewsComponent extends Component {
   }
 
   render() {
-    const { newsTypes } = this.props;
+    const { newsTypes, carpets } = this.props;
     const { newsBySlug } = this.props.news;
     const { activeTabIndex } = this.state;
+    console.log('carpets:', carpets);
 
     return (
+      <React.Fragment>
         <div className="main-right-news-container">
           <div className="main-right-news-head">
             <ul>
@@ -70,6 +72,22 @@ class NewsComponent extends Component {
             </div>
           </div>
         </div>
+        <div className="main-right-news-container">
+          <div className="main-right-news-head">
+            <ul>
+              <li><a href="#">Latest</a></li>
+              <li><a href="#" className="active">Red Carpet</a></li>
+              <li><a href="#">Special</a></li>
+            </ul>
+          </div>
+          <div className="main-pics-list">
+            {carpets.map(carpet => <a href="#">
+              <img src={`http://localhost:8000/${carpet.image}`} title={carpet.name} />
+            </a>)}
+
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }

@@ -53,7 +53,7 @@ class FilmsComponent extends Component {
                     <div className="row no-gutters">
                       <div className="col-10">
                         <p className="list-title">
-                          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                          <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
                         </p>
                         <div className="info_m">
                           <div className="age_allow pg18">18+</div>
