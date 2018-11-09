@@ -5,11 +5,12 @@ import store from './store';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HomeComponent from './components/home/HomeComponent';
-import TVShowsComponent from './components/movie/TVShowsComponent';
 import HeaderComponent from "./components/HeaderComponent";
 import FooterComponent from "./components/FooterComponent";
 import FilmsComponent from "./components/movie/FilmsComponent";
 import FilmComponent from './components/movie/FilmComponent';
+import ShowsComponent from './components/movie/ShowsComponent';
+import ShowComponent from './components/movie/ShowComponent';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -20,7 +21,8 @@ ReactDOM.render(
           <Route exact={true} path={"/"} component={HomeComponent} />
           <Route exact path={"/movies"} component={FilmsComponent} />
           <Route path={"/movie/:id"} component={FilmComponent} />
-          <Route path={"/tv-shows"} component={TVShowsComponent} />
+          <Route path={"/tv-shows"} component={ShowsComponent} />
+          <Route path={"/shows/:id(\\d+)"} component={ShowComponent} />
           <Route component={HomeComponent}/>
         </Switch>
         <FooterComponent />

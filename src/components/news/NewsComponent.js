@@ -24,7 +24,6 @@ class NewsComponent extends Component {
     const { newsTypes, carpets } = this.props;
     const { newsBySlug } = this.props.news;
     const { activeTabIndex } = this.state;
-    console.log('carpets:', carpets);
 
     return (
       <React.Fragment>
@@ -81,7 +80,7 @@ class NewsComponent extends Component {
             </ul>
           </div>
           <div className="main-pics-list">
-            {carpets.map(carpet => <a href="#">
+            {carpets.map(carpet => <a href="#" key={carpet.id}>
               <img src={`http://localhost:8000/${carpet.image}`} title={carpet.name} />
             </a>)}
 

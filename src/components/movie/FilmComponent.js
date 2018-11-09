@@ -150,7 +150,7 @@ class FilmComponent extends React.Component {
               <table className="table film_cast" border="1">
                 <tbody>
                 {movie.cast.map(cast => {
-                  return <tr>
+                  return <tr key={cast.id}>
                     <td><img src={`http://localhost:8000/${cast.peopleImage}`} alt=""/></td>
                     <td>{cast.peopleName}</td>
                     <td>{cast.occupation}</td>

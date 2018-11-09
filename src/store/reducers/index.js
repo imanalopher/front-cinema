@@ -4,6 +4,7 @@ import news from './newsReducers';
 import newsTypes from './newsTypesReducers';
 import people from './peopleReducers';
 import redCarpets from './redCarpet';
+import shows from './showsReducers';
 
 export default combineReducers({
   movies,
@@ -11,4 +12,5 @@ export default combineReducers({
   newsTypes,
   people,
   redCarpets,
+  shows,
 });

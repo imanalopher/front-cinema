@@ -9,9 +9,6 @@ import { birthdayPeopleListAsync } from './../../store/actions/peopleActions';
 import BirthdayPeopleComponent from '../people/BirthdayPeopleComponent';
 
 class HomeComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentWillMount() {
     this.props.getNewsTypes();
