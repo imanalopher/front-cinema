@@ -43,7 +43,7 @@ export function newsProfileAsync(slug) {
 
 export function newsListBySlugAsync(slug) {
   return (dispatch) => {
-    return fetchGetNews(`http://127.0.0.1:8000/api/news/${slug}`).then(json => dispatch(newsListBySlug(json)));
+    return fetchGetNews(`http://127.0.0.1:8000/api/news/type/${slug}`).then(json => dispatch(newsListBySlug(json)));
   };
 }
 
