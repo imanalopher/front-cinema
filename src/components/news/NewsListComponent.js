@@ -4,7 +4,7 @@ import Pagination from 'react-js-pagination';
 import { connect } from 'react-redux';
 import { newsListAsync } from '../../store/actions/newsActions';
 
-class NewsComponent extends Component {
+class NewsListComponent extends Component {
   constructor(props) {
     super(props);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -83,7 +83,7 @@ class NewsComponent extends Component {
   }
 }
 
-NewsComponent.defaultProps = {
+NewsListComponent.defaultProps = {
   newsList: {
     news:           PropTypes.array.isRequired,
     count:          PropTypes.number.isRequired,
@@ -98,4 +98,4 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => state.news;
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewsComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsListComponent);
