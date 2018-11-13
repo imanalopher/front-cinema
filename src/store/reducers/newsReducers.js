@@ -7,11 +7,17 @@ const initialState = {
   newsBySlug: [],
   hypeNews: [],
   spotlightNews: [],
+  newsProfile: {
+    news: {},
+    latestNews: []
+  },
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case 'GET_NEWS':
+    case 'GET_NEWS_PROFILE':
+      return { ...state, newsProfile: action.payload };
+    case 'GET_NEWS_LIST':
       return { ...state, newsList: action.payload };
     case 'GET_NEWS_BY_SLUG':
       return { ...state, newsBySlug: action.payload };

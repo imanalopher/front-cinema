@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import { connect } from 'react-redux';
 import { newsListAsync } from '../../store/actions/newsActions';
+import { Link } from "react-router-dom";
 
 class NewsListComponent extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class NewsListComponent extends Component {
                         </div>
                         <div className="news_column">
                           <p>
-                            <a href="news_page.html">{news.title}</a>
+                            <Link to={`/news/${news.slug}`}>{news.title}</Link>
                           </p>
                           <p>
                             <i className="far fa-clock"/> <b>{new Date(news.createdAt).toLocaleString()}</b> / By <span>Alexander Roman</span>

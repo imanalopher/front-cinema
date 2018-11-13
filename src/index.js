@@ -12,6 +12,7 @@ import FilmComponent from './components/movie/FilmComponent';
 import ShowsComponent from './components/movie/ShowsComponent';
 import ShowComponent from './components/movie/ShowComponent';
 import NewsListComponent from './components/news/NewsListComponent';
+import NewsComponent from './components/news/NewsComponent';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,7 +25,8 @@ ReactDOM.render(
           <Route path={"/movie/:id"} component={FilmComponent} />
           <Route path={"/tv-shows"} component={ShowsComponent} />
           <Route path={"/shows/:id(\\d+)"} component={ShowComponent} />
-          <Route path={"/news"} component={NewsListComponent} />
+          <Route exact={true} path={"/news"} component={NewsListComponent} />
+          <Route path={"/news/:slug"} component={NewsComponent} />
           <Route component={HomeComponent}/>
         </Switch>
         <FooterComponent />

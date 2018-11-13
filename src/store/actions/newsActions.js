@@ -1,25 +1,30 @@
 
-export const newsList = news => ({
-    type: 'GET_NEWS',
+const newsProfile = news => ({
+    type: 'GET_NEWS_PROFILE',
     payload: news,
 });
 
-export const newsListBySlug = news => ({
+const newsList = news => ({
+    type: 'GET_NEWS_LIST',
+    payload: news,
+});
+
+const newsListBySlug = news => ({
     type: 'GET_NEWS_BY_SLUG',
     payload: news,
 });
 
-export const clearNewsListBySlug = () => ({
+const clearNewsListBySlug = () => ({
     type: 'CLEAR_NEWS_BY_SLUG',
     payload: [],
 });
 
-export const hypeNews = news => ({
+const hypeNews = news => ({
     type: 'HYPE_NEWS',
     payload: news,
 });
 
-export const spotlightNews = news => ({
+const spotlightNews = news => ({
     type: 'GET_SPOTLIGHT_NEWS',
     payload: news,
 });
@@ -27,6 +32,12 @@ export const spotlightNews = news => ({
 export function newsListAsync(page) {
   return (dispatch) => {
     return fetchGetNews(`http://127.0.0.1:8000/api/news?page=${page}`).then( json => dispatch(newsList(json)) );
+  };
+}
+
+export function newsProfileAsync(slug) {
+  return (dispatch) => {
+    return fetchGetNews(`http://127.0.0.1:8000/api/news/${slug}`).then( json => dispatch(newsProfile(json)) );
   };
 }
 
