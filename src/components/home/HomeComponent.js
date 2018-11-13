@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import MoviesComponent from './../movie/MoviesComponent';
-import NewsComponent from '../news/NewsComponent';
+import NewsComponent from './news/NewsComponent';
 import { connect } from 'react-redux';
 import { redCarpetListAsync } from './../../store/actions/redCarpetAction';
 import { newsTypesListAsync } from './../../store/actions/newsTypeAction';

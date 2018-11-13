@@ -24,9 +24,9 @@ export const spotlightNews = news => ({
     payload: news,
 });
 
-export function newsListAsync() {
+export function newsListAsync(page) {
   return (dispatch) => {
-    return fetchGetNews('http://127.0.0.1:8000/api/news').then( json => dispatch(newsList(json)) );
+    return fetchGetNews(`http://127.0.0.1:8000/api/news?page=${page}`).then( json => dispatch(newsList(json)) );
   };
 }
 

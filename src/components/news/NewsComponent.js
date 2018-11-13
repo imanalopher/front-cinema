@@ -1,120 +1,101 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Pagination from 'react-js-pagination';
 import { connect } from 'react-redux';
-import Tab from './Tab';
-import { newsListBySlugAsync } from '../../store/actions/newsActions';
-import MovieComponent from '../movie/MovieComponent';
+import { newsListAsync } from '../../store/actions/newsActions';
 
 class NewsComponent extends Component {
   constructor(props) {
     super(props);
-
-    this.changeTab = this.changeTab.bind(this);
-    this.props.getNewsBySlug(this.state.activeTabIndex);
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.state = {
+      activePage: 1
+    };
   }
 
-  state = { activeTabIndex: 'top-news' };
+  componentWillMount() {
+    this.props.newsListAsync(1);
+  }
 
-  changeTab(index) {
-    this.props.getNewsBySlug(index);
-    this.setState({ activeTabIndex: index });
+  handlePageChange(pageNumber) {
+    this.setState({activePage: pageNumber});
+    this.props.newsListAsync(pageNumber);
   }
 
   render() {
-    const { newsTypes, carpets } = this.props;
-    const { newsBySlug } = this.props.news;
-    const { activeTabIndex } = this.state;
+    const { newsList } = this.props;
+    const newsCount = newsList.count;
 
     return (
-      <React.Fragment>
-        <div className="main-right-news-container">
-          <div className="main-right-news-head">
-            <ul>
-              <Tab active={activeTabIndex === 'top-news'} onClick={this.changeTab.bind(this, 'top-news')}>Top news</Tab>
-              {newsTypes.map(newsTypeItem => {
-                return (
-                  <Tab key={newsTypeItem.id} active={activeTabIndex === newsTypeItem.slug} onClick={this.changeTab.bind(this, newsTypeItem.slug)}>{newsTypeItem.title}</Tab>
-                );
-              })}
-            </ul>
-          </div>
-          <div className={"main-right-news-list"}>
-            <div id="accordion">
-              {newsBySlug.map(newsItem => {
-                return <div className="card" key={newsItem.id}>
-                  <div className="card-header" id={`heading${newsItem.id}`}>
-                    <a className="news-head collapsed" data-toggle="collapse" data-target={`#collapse${newsItem.id}`} aria-controls={`collapse${newsItem.id}`}>
-                      <label>{newsItem.title}</label>
-                      <span><i className="far fa-clock"/>1 hour ago</span>
-                    </a>
-                    <img src={`http://localhost:8000/${newsItem.image}`} />
-                  </div>
-                  <div id={`collapse${newsItem.id}`} className="collapse" aria-labelledby={`heading${newsItem.id}`} data-parent="#accordion">
-                    <div className="card-body">
-                      {newsItem.description}
-                      <div className="main-news-bottom">
-                        <div className="news-read-more">
-                          <a href="#">See More..</a>
+        <section className="main-layout">
+            <div className="container main-container">
+                <div className="m-list-header">
+                    <label className="main_title top_news">Top News</label>
+                    <div className="mlist-sort">
+                        <select>
+                            <option>LAST WEEK</option>
+                            <option>2</option>
+                            <option>2</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="row news_container">
+                  {newsList.news.map(news => {
+                    return <div className="col-6" key={news.id}>
+                      <div className="list_of_news">
+                        <div className="row no-gutters">
+                          <img src={`http://localhost:8000${news.image}`} alt=""/>
                         </div>
-                        <div className="news-main-details">
-                          <ul>
-                            <li><a href="#"><i className="far fa-heart"/></a>{newsItem.likeCount}</li>
-                            <li><a href="#"><i className="far fa-comment-alt"/>503</a></li>
-                            <li><a title="Share this post" href="#"><i className="fas fa-share-square"/></a></li>
-                          </ul>
+                        <div className="news_column">
+                          <p>
+                            <a href="news_page.html">{news.title}</a>
+                          </p>
+                          <p>
+                            <i className="far fa-clock"/> <b>{new Date(news.createdAt).toLocaleString()}</b> / By <span>Alexander Roman</span>
+                          </p>
+                          <p>{news.miniDescription}</p>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  })}
                 </div>
-              })}
+                <div className="col-lg-6 offset-lg-3 d-flex">
+                  <Pagination
+                    activePage={this.state.activePage}
+                    activeClass={'active_page'}
+                    itemClass={'page-item'}
+                    innerClass={'pagination mx-auto justify-content-center'}
+                    itemsCountPerPage={2}
+                    totalItemsCount={newsCount}
+                    pageRangeDisplayed={5}
+                    linkClass={'page-link'}
+                    lastPageText={<i className="fas fa-arrow-right"/>}
+                    firstPageText={<i className="fas fa-arrow-left"/>}
+                    onChange={this.handlePageChange}
+                    hideDisabled={true}
+                    hideFirstLastPages={false}
+                    hideNavigation={true}
+                  />
+                </div>
             </div>
-          </div>
-        </div>
-        <div className="main-right-news-container">
-          <div className="main-right-news-head">
-            <ul>
-              <li><a href="#">Latest</a></li>
-              <li><a href="#" className="active">Red Carpet</a></li>
-              <li><a href="#">Special</a></li>
-            </ul>
-          </div>
-          <div className="main-pics-list">
-            {carpets.map(carpet => <a href="#" key={carpet.id}>
-              <img src={`http://localhost:8000/${carpet.image}`} title={carpet.name} />
-            </a>)}
-
-          </div>
-        </div>
-      </React.Fragment>
+        </section>
     );
   }
 }
 
-MovieComponent.defaultProps = {
-  newsItem: {
-    title:           PropTypes.string.isRequired,
-    likeCount:       PropTypes.number.isRequired,
-    image:           PropTypes.string.isRequired,
-    description:     PropTypes.string.isRequired,
-    genre:           PropTypes.string.isRequired,
+NewsComponent.defaultProps = {
+  newsList: {
+    news:           PropTypes.array.isRequired,
+    count:          PropTypes.number.isRequired,
   },
-  item: {
-    slug:            PropTypes.string.isRequired,
-    title:           PropTypes.string.isRequired,
-  }
-};
-
-NewsComponent.propTypes = {
-  newsTypes: PropTypes.array.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  getNewsBySlug(slug) {
-    dispatch(newsListBySlugAsync(slug))
+  newsListAsync(page) {
+    dispatch(newsListAsync(page))
   }
 });
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state.news;
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewsComponent);

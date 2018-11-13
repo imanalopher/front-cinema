@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getHomeMovieListAsync } from "../../store/actions/movieActions";
-import Tab from './../news/Tab';
+import Tab from '../home/news/Tab';
 
 class MoviesComponent extends Component {
   constructor(props) {
