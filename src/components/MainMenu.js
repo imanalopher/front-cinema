@@ -16,7 +16,9 @@ class MainMenu extends Component {
                 <li>
                   <NavLink to="/tv-shows" activeClassName="active">ТВ шоу</NavLink>
                 </li>
-                <li><a href="#">звезды</a></li>
+                <li>
+                  <NavLink to="/celebs" activeClassName="active">звезды</NavLink>
+                </li>
                 <li>
                     <NavLink to="/news" activeClassName="active">Новости и события</NavLink>
                 </li>

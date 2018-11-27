@@ -1973,10 +1973,18 @@ margin-right: 8px;
 	padding: 7px 20px;
 	display: inline-block;
 }
-.celeb_container .celeb_rate img{
-	width: 19px;
-	height: 15px;
+.celeb_container .celeb_rate img, .celeb_container .celeb_rate_down img{
+	width: 16px;
+	height: 12px;
 	margin-right: 9px;
+}
+.celeb_container .celeb_rate_down {
+    background: #ff8f53;
+    color:#fff;
+    border-radius: 20px;
+    font-size: 18px;
+    padding: 7px 20px;
+    display: inline-block;
 }
 .celeb_birth, .celeb_movie, .celeb_foto, .celeb_icons{
 	text-align: center;
@@ -2064,5 +2072,72 @@ margin-right: 8px;
 	padding-top: 20px;
 	padding-bottom: 20px;
 	background: #f1f1f1;
-
+}
+.registration_user .registration_container, .registration_user .sign_in_container{
+	margin: auto;
+	width:478px;
+	border-radius: 5px;
+	background: #fff;
+}
+.registration_container .header_registr, .sign_in_container .header_registr{
+	background: #2493ef;
+	color: #fff;
+	font-size: 24px;
+	text-align: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	padding: 25px 0 25px 0;
+}
+.registration_container label, .sign_in_container label{
+	color: #bdbdbd;
+	font-size: 12px;
+	margin-left: 5px;
+}
+.registration_container form, .sign_in_container form{
+	margin-top: 25px;
+	padding: 0 15px;
+}
+.registration_container input, .sign_in_container input{
+	border-right-style: none;
+	border-left-style: none;
+	border-top-style: none;
+	border-radius: 0;
+	padding-left: 5px;
+}
+.sign_in_container input:focus, .registration_container input:focus{
+	border: transparent !important;
+	border-bottom: 1px solid #e0e0e0 !important;
+}
+.registration_container button{
+	background: #5fd27e;
+	border: 0;
+	border-radius: 5px;
+	width: 440px;
+	font-size: 14px;
+	margin-top: 10px;
+	text-transform: uppercase;
+}
+.registration_user .sign_in_container button{
+	background: #e0e0e0;
+	border: 0;
+	border-radius: 5px;
+	width: 440px;
+	color: #fff;
+	font-size: 14px;
+	margin-top: 10px;
+	text-transform: uppercase;
+}
+.registration_container button:hover, .sign_in_container button:hover{
+	background: #2493ef;
+}
+.registration_user .sign_in_container .have_account, .registration_container .sign_in{
+	text-align: center;
+	margin-top: 20px;
+	padding-bottom: 25px;
+	font-size: 13px;
+	color: #545454;
+}
+.sign_in_container .have_account a:link, .sign_in_container .have_account a:visited, .registration_container .sign_in a:link, .registration_container .sign_in a:visited{
+	text-decoration: none;
+	color: #2493ef;
 }

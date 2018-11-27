@@ -4,15 +4,18 @@ import { Provider } from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import HomeComponent from './components/home/HomeComponent';
-import HeaderComponent from "./components/HeaderComponent";
-import FooterComponent from "./components/FooterComponent";
-import FilmsComponent from "./components/movie/FilmsComponent";
-import FilmComponent from './components/movie/FilmComponent';
-import ShowsComponent from './components/movie/ShowsComponent';
-import ShowComponent from './components/movie/ShowComponent';
-import NewsListComponent from './components/news/NewsListComponent';
-import NewsComponent from './components/news/NewsComponent';
+
+import HomeComponent      from './components/home/HomeComponent';
+import HeaderComponent    from './components/HeaderComponent';
+import FooterComponent    from './components/FooterComponent';
+import FilmsComponent     from './components/movie/FilmsComponent';
+import FilmComponent      from './components/movie/FilmComponent';
+import ShowsComponent     from './components/movie/ShowsComponent';
+import ShowComponent      from './components/movie/ShowComponent';
+import NewsListComponent  from './components/news/NewsListComponent';
+import NewsComponent      from './components/news/NewsComponent';
+import CelebsComponent    from './components/celeb/CelebsComponent';
+import CelebsProfileComponent from './components/celeb/CelebsProfileComponent';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -27,6 +30,8 @@ ReactDOM.render(
           <Route path={"/shows/:id(\\d+)"} component={ShowComponent} />
           <Route exact={true} path={"/news"} component={NewsListComponent} />
           <Route path={"/news/:slug"} component={NewsComponent} />
+          <Route exact={true} path={"/celebs"} component={CelebsComponent} />
+          <Route path={"/celebs/:id(\\d+)"} component={CelebsProfileComponent} />
           <Route component={HomeComponent}/>
         </Switch>
         <FooterComponent />
